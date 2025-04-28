@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غرفة الدردشة</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="join-container" id="join-container">
+            <h1>انضم للدردشة</h1>
+            <div class="join-form">
+                <input type="text" id="username" placeholder="أدخل اسمك" required/>
+                <button id="join-btn">انضم</button>
+            </div>
+        </div>
+
+        <div class="chat-container" id="chat-container">
+            <div class="chat-header">
+                <h2>غرفة الدردشة</h2>
+            </div>
+            <div class="chat-main">
+                <div class="users-container">
+                    <h3>المستخدمون المتصلون</h3>
+                    <ul id="users"></ul>
+                </div>
+                <div class="messages-container">
+                    <div id="messages"></div>
+                </div>
+            </div>
+            <div class="chat-form-container">
+                <form id="chat-form">
+                    <input id="msg" type="text" placeholder="اكتب رسالتك هنا..." required autocomplete="off"/>
+                    <button class="send-btn">إرسال</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
