@@ -11,10 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const usernameInput = document.getElementById('username');
     const usersList = document.getElementById('users');
     
+    // تعقب حالة المستخدم (إذا كان منضماً للمحادثة أم لا)
+    let userJoined = false;
+    
     // إظهار واجهة الدردشة وإخفاء نموذج الانضمام
     function showChatInterface() {
         joinContainer.style.display = 'none';
         chatContainer.style.display = 'flex';
+        userJoined = true; // تعيين حالة المستخدم كمنضم
     }
     
     // إضافة رسالة إلى واجهة الدردشة
@@ -81,6 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
+        // منع إرسال رسائل إذا لم يكن المستخدم منضماً للمحادثة
+        if (!userJoined) {
+            alert('يجب عليك الانضمام للمحادثة أولاً!');
+            return;
+        }
+        
         const message = messageInput.value.trim();
         if (!message) {
             return;
@@ -99,5 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     socket.on('updateUserList', (users) => {
         updateUserList(users);
+    });
+    
+    // إضافة مستمع لإعادة تحميل الصفحة
+    window.addEventListener('beforeunload', () => {
+        userJoined = false; // إعادة تعيين حالة المستخدم عند مغادرة الصفحة
     });
 });
